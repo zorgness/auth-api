@@ -16,14 +16,19 @@ export const Logout = async (e) => {
 
     })
 
-      if(!response.ok) {
+      if (!response.ok) {
         throw new Error(response.message)
       }
       const fetchedData = await response.json()
 
-      fetchedData.message === 'Logged out.' && localStorage.clear()
+      if (fetchedData.message === 'Logged out.') {
+        localStorage.clear()
+
+      }
+
 
       console.log(fetchedData.message)
+      // return false
 
     }
     catch (error) {

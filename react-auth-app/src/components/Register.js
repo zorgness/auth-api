@@ -7,6 +7,7 @@ const Register = () => {
 
   const data = {
     "email" : "",
+    "username" : "",
     "password" : "",
     "confirmPassword" : "",
   }
@@ -16,7 +17,7 @@ const Register = () => {
   const [redirect, setRedirect] = useState(false)
 
 
-  const {email, password, confirmPassword} = registerData
+  const {email, username, password, confirmPassword} = registerData
 
   const handleChange = e => {
 
@@ -25,7 +26,7 @@ const Register = () => {
 
   const handleSubmit = e => {
 
-    const {email, password, confirmPassword} = registerData
+    const {email, username, password, confirmPassword} = registerData
 
     if(password !== confirmPassword ) {
       setError(`Invalid password!`)
@@ -35,6 +36,7 @@ const Register = () => {
       const data = {
         "user": {
           "email": email,
+          "username": username,
           "password": password,
 
           }}
@@ -101,6 +103,11 @@ const Register = () => {
         <Form.Text className="text-muted">
           We'll never share your email with anyone else.
         </Form.Text>
+      </Form.Group>
+
+      <Form.Group className="mb-3" >
+        <Form.Label>Username</Form.Label>
+        <Form.Control onChange={handleChange} value={username} type="text" id="username" placeholder="Username" />
       </Form.Group>
 
       <Form.Group className="mb-3" >

@@ -2,10 +2,11 @@ import React, {Fragment} from 'react'
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { Logout } from './Logout';
+// import { Logout } from './Logout';
 
 
-const NavbarApp = () => {
+const NavbarApp = props => {
+
   return (
     <Fragment>
        <Navbar bg="dark" variant="dark">
@@ -15,7 +16,7 @@ const NavbarApp = () => {
             <Nav.Link href="/">Home</Nav.Link>
             <Nav.Link href="signup">Register</Nav.Link>
             <Nav.Link href="login">Login</Nav.Link>
-            <Nav.Link href="/" onClick={ Logout}>Logout</Nav.Link>
+            <Nav.Link href="/" onClick={ props.Logout }>Logout</Nav.Link>
           </Nav>
         </Container>
       </Navbar>

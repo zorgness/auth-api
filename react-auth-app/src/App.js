@@ -11,6 +11,13 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
+  // const userData = JSON.parse(sessionStorage.getItem('user'));
+
+
+  // useEffect(() => {
+  //   console.log(userData);
+  // }, [])
+
   const [userData, setUserData] = useState({});
 
   const url = 'http://localhost:3000/current_user';
@@ -33,7 +40,10 @@ function App() {
       }
 
       const fetchedData = await response.json()
-      fetchedData.message !== 'Logged.' && setUserData(fetchedData)
+
+      if (fetchedData.message !== 'Logged.') {
+        setUserData(fetchedData)
+      }
 
     }
     catch (error) {
@@ -42,23 +52,67 @@ function App() {
     }
   }
 
-  console.log(userData)
+  const Logout = async (e) => {
+
+    e.preventDefault();
+
+    const url = 'http://localhost:3000/users/sign_out'
+
+    const token = localStorage.getItem('token')
+
+    try {
+
+      const response = await fetch(url, { method: "DELETE", headers: {
+        'Authorization': `${token}`,
+        'Content-Type': 'application/json'
+      },
+
+
+    })
+
+      if (!response.ok) {
+        throw new Error(response.message)
+      }
+      const fetchedData = await response.json()
+
+      if (fetchedData.message === 'Logged out.') {
+        localStorage.clear()
+        setUserData({})
+
+      }
+
+
+      console.log(fetchedData.message)
+
+
+    }
+    catch (error) {
+
+      console.log(error.message)
+    }
+
+
+  }
+
+
+
 
   useEffect(() => {
 
    checkedStatus()
+
 
   }, [])
 
   return (
 
         <Fragment>
-        <NavbarApp/>
+        <NavbarApp Logout={Logout} />
         <Router>
         <Routes>
             <Route exact path="/" element={<Home user={userData} />} />
             <Route path="/signup" element={<Register />} />
-            <Route path="/login" element={<Login />} />
+            <Route path="/login" element={<Login setUserData={setUserData} />} />
         </Routes>
         </Router>
         </Fragment>

@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Navigate} from 'react-router'
 
-const Login = () => {
+const Login = props => {
 
   const data = {
     "email" : "",
@@ -64,13 +64,14 @@ const Login = () => {
 
       const fetchedData = await response.json()
 
-      fetchedData.message === 'Logged.' && setRedirect(true)
+      if(fetchedData.message === 'Logged.') {
 
-      console.log(fetchedData.message)
-
+        // await sessionStorage.setItem('user', JSON.stringify(fetchedData.user))
+        props.setUserData(fetchedData.user)
+        setRedirect(true)
+      }
     }
     catch (error) {
-
       setError(error)
     }
   }
@@ -78,11 +79,9 @@ const Login = () => {
   const errorMsg = error !== '' && <span>{error.message}</span>;
 
 
-
   if (redirect) {
     return <Navigate to='/'/>;
   }
-
 
   return (
     <div className='form-container'>
