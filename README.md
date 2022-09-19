@@ -1,5 +1,8 @@
 # README
 
+
+## Simple authentication APP with Rails for Back-end and React.js for Front-end
+
 This README would normally document whatever steps are necessary to get the
 application up and running.
 
