@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Navigate} from 'react-router'
 
-const Login = props => {
+const Login = ({setUserData, setloggedIn}) => {
 
   const data = {
     "email" : "",
@@ -66,8 +66,8 @@ const Login = props => {
 
       if(fetchedData.message === 'Logged.') {
 
-        // await sessionStorage.setItem('user', JSON.stringify(fetchedData.user))
-        props.setUserData(fetchedData.user)
+        setUserData(fetchedData.user)
+        setloggedIn(true)
         setRedirect(true)
       }
     }

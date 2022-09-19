@@ -11,14 +11,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 function App() {
 
-  // const userData = JSON.parse(sessionStorage.getItem('user'));
-
-
-  // useEffect(() => {
-  //   console.log(userData);
-  // }, [])
-
   const [userData, setUserData] = useState({});
+  const [loggedIn, setloggedIn] = useState(false);
 
   const url = 'http://localhost:3000/current_user';
 
@@ -43,6 +37,7 @@ function App() {
 
       if (fetchedData.message !== 'Logged.') {
         setUserData(fetchedData)
+        setloggedIn(true)
       }
 
     }
@@ -78,6 +73,7 @@ function App() {
       if (fetchedData.message === 'Logged out.') {
         localStorage.clear()
         setUserData({})
+        setloggedIn(false)
 
       }
 
@@ -107,12 +103,12 @@ function App() {
   return (
 
         <Fragment>
-        <NavbarApp Logout={Logout} />
+        <NavbarApp Logout={Logout} loggedIn={loggedIn} />
         <Router>
         <Routes>
             <Route exact path="/" element={<Home user={userData} />} />
             <Route path="/signup" element={<Register />} />
-            <Route path="/login" element={<Login setUserData={setUserData} />} />
+            <Route path="/login" element={<Login setUserData={setUserData} setloggedIn={setloggedIn} />} />
         </Routes>
         </Router>
         </Fragment>
