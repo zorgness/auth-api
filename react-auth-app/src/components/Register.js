@@ -3,7 +3,7 @@ import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import { Navigate} from 'react-router'
 
-const Register = () => {
+const Register = ({setUserData, setloggedIn }) => {
 
   const data = {
     "email" : "",
@@ -70,9 +70,16 @@ const Register = () => {
 
       const fetchedData = await response.json()
 
-      fetchedData.message === 'Signed up.' && setRedirect(true)
-
       console.log(fetchedData.message)
+
+      if (fetchedData.message === 'Signed up.') {
+          setUserData(fetchedData.user)
+          setloggedIn(true)
+          setRedirect(true)
+
+      } else {
+        setError(fetchedData)
+      }
 
     }
     catch (error) {
@@ -81,7 +88,7 @@ const Register = () => {
     }
   }
 
-  const errorMsg = error !== '' && <span>{error}</span>;
+  const errorMsg = error !== '' && <span>{error.message}</span>;
 
 
 
