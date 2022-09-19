@@ -107,7 +107,7 @@ function App() {
         <Router>
         <Routes>
             <Route exact path="/" element={<Home user={userData} />} />
-            <Route path="/signup" element={<Register />} />
+            <Route path="/signup" element={<Register setUserData={setUserData} setloggedIn={setloggedIn}  />} />
             <Route path="/login" element={<Login setUserData={setUserData} setloggedIn={setloggedIn} />} />
         </Routes>
         </Router>
