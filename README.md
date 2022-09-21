@@ -3,7 +3,7 @@
 
 ## Simple authentication APP with Rails for Back-end and React.js for Front-end
 
-Not finished yet, need to add Redux and 
+Not finished yet, need to add Redux and major improvements in conception
 
 ### Please don't use as it is for security matter.
 
